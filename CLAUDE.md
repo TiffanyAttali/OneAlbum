@@ -1,10 +1,12 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.2, 2026-10-13 (adds sound bins). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.3, 2026-10-13 (adds sound bins and "Who do you support"). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
 Tagline: "Spotify keeps you home. This takes you to the edges."
+Who you support: the user chooses who gets their listening time. "Alive" is the base filter; others can narrow it
+(women, African artists, queer artists, mothers, artists from Paris 11e...). See "Who do you support" below.
 The working prototype (claude.ai artifact, v13) is the reference for features. Every prototype feature stays.
 
 ## Identity rules (never break these)
@@ -35,6 +37,14 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Distance from the profile decides close / edge / far. Genre labels only add a penalty.
 - The user's sound clusters are shown as named **bins** (like record-shop bins). Bins are part of the mood filter.
 - "Pick in a bin" page: tapping a bin triggers the next album from that bin. One bin is always "Outside my bins" and sits first (it is the product promise; decided by Tiff 2026-10-13).
+
+## Who do you support (idea, Tiff 2026-10-13)
+- Extends the "living artists" rule: users pick whose work their listening time supports, from broad ("alive") to specific
+  (gender, region, city or neighbourhood, queer, parent...). Several can combine.
+- These are support filters on the pool, applied before picking. They never replace taste: picks still come from the edges of the user's sound.
+- Open question: identity tags (queer, mother, gender...) only come from what artists say publicly about themselves
+  (self-declared sources such as their own bios or interviews, or MusicBrainz/Wikidata entries citing them). Never inferred from a name, photo, voice or genre.
+- Origin filters (country, city, neighbourhood) can use MusicBrainz/Wikidata area data.
 
 ## Album pool rules (draft, see Notion task)
 - Studio albums only: MusicBrainz release group primary type Album, no secondary types
