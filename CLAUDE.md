@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.3, 2026-10-13 (adds sound bins and "Who do you support"). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.4, 2026-10-13 (adds sound bins, "Who do you support" and "Coup de cœur"). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -17,6 +17,9 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Taste first, mood second. Mood genre toggles are firm; mood sliders are soft targets.
 - Ratings are a quality cue, never a direction (small, capped, fading weight).
   "Know it already" pushes further out. "Stopped early" is weak. "Not the mood" is ignored.
+- "Coup de cœur" button next to the rating (Tiff, 2026-10-13): marks an album the user fell for and keeps it on a
+  "Coups de cœur" shelf. It counts as the strongest quality cue but, like every rating, never steers picks toward
+  similar albums (loved albums create loops).
 - Every pick: artist alive and active, checked against data. Never trust a model to remember this.
 - Genre is only ever a penalty (no-repeat on main genre over the last 2 picks), never a target.
 - No examples in prompts or seeds: they become anchors. Each pick starts from a random thread in the user's library.
