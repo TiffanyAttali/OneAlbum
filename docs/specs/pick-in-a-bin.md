@@ -1,6 +1,6 @@
 # Spec: Pick in a bin
 
-Draft v0.1, 2026-10-13. For Tiff's review. Rules it touches: Engine (bins), Identity (never two picks in a row from one region).
+Draft v0.2, 2026-10-14 (fact-checked; fixed 3 clashes with CLAUDE.md rules). For Tiff's review. Rules it touches: Engine (bins), Identity (never two picks in a row from one region).
 
 ## What the user sees
 - A **"Pick in a bin"** page laid out like a record-shop rack: one bin card per sound bin, plus **"Outside my bins"** first.
@@ -19,15 +19,15 @@ Draft v0.1, 2026-10-13. For Tiff's review. Rules it touches: Engine (bins), Iden
 ## How a pick from a bin works
 1. Candidate albums = pool albums whose fingerprint is closest to that bin's centre (nearest bin wins).
 2. Apply the usual hard filters: living, active artist; never picked before; not already in the library; support filters.
-3. Apply the adventure slider *inside* the bin: Home = albums near the bin centre, Edges = the bin's outer ring,
-   Elsewhere = albums between this bin and an outside zone.
-4. Same no-repeat rule as today, using bins instead of genre: never two picks in a row from the same bin,
-   unless the user tapped that bin twice on purpose.
+3. Apply the adventure slider *inside* the bin, with the same mix as everywhere (Home 40/50/10 etc.): close = near the bin centre,
+   edge = the bin's outer ring, far = between this bin and an outside zone. Never 100% close, even in a bin.
+4. Same no-repeat rule as today, using bins instead of genre: never two picks in a row from the same bin.
+   Open question for Tiff: if she taps the same bin twice on purpose, is that an allowed exception to this never-break rule?
 
 ## "Outside my bins"
 - Candidates = pool albums farther from every bin centre than 90% of the user's own tracks (the rule used for Tiff's 4 outside zones).
 - Picks rotate across outside zones so it never settles into one new place.
-- Reached from an artist the user loves where possible (the "edge" idea), so it feels like a lead, not noise.
+- Starts from a random thread in the user's library, like every pick (never seeded from loved or 5/5 artists: ratings never steer).
 
 ## Edge cases
 - A bin with fewer than ~20 candidate albums after filters: show it greyed with "Few albums here for now".

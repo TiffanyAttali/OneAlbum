@@ -1,6 +1,6 @@
 # Spec: Who do you support
 
-Draft v0.1, 2026-10-13. For Tiff's review. Rules it touches: Identity (living artists), Album pool rules, Privacy.
+Draft v0.2, 2026-10-14 (fact-checked). For Tiff's review. Rules it touches: Identity (living artists), Album pool rules, Privacy.
 
 ## The idea (Tiff)
 Users choose whose work their listening time supports. "Alive" is the base; others narrow it:
@@ -29,7 +29,9 @@ women, African artists, queer artists, mothers, artists from Paris 11e... Severa
   (their own bio, interviews, or a database entry that cites them). Never inferred from a name, photo, voice, lyrics or genre.
 - Unknown is a normal value: an artist without data is not "not queer"; they are simply outside that filter.
 - Proposal for later: let artists claim their own profile and add their tags (self-declared, removable any time).
-- Before launch: a short legal check (sensitive data under GDPR: sexual orientation is a special category even when public).
+- **Blocks launch of identity filters:** a legal check first. Sexual orientation is GDPR special-category data; shipping it in
+  the map means we process and distribute it. Origin and "alive" filters don't have this problem and can ship first.
+- Sizes: queer, parent or neighbourhood filters will often leave fewer than ~300 albums; expect to offer them as "widen" suggestions.
 
 ## Done when
 - Launch list of filters agreed with Tiff, with a source per filter.

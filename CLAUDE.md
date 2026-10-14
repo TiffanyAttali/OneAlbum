@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.5, 2026-10-14 (adds optional accounts with encrypted personal data, and picking on the device). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.6, 2026-10-14 (v0.5 added optional accounts and on-device picking; v0.6 fact-checks pool rules and privacy wording). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -29,7 +29,10 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Accounts are optional (decided by Tiff 2026-10-14). If a user signs in to back up or sync, their personal data is encrypted
   on the device before it leaves (end-to-end). The server only stores data it cannot read.
 - The server holds the public album map. It never receives anything readable about a user's taste.
-- No analytics, no tracking, no server logs that tie a request to a user's IP address.
+- No analytics, no tracking, no server logs that tie a request to a user's IP address. Check the host's default logs before launch
+  (Vercel and Supabase keep request logs with IPs unless configured otherwise).
+- Album links (Odesli) are pre-computed into the public map, so no third party sees what a user was picked.
+- Say it honestly: the Plus licence check sends the licence key to Lemon Squeezy, which knows the buyer's name and email.
 - Screenshots are read on the device (Tesseract.js); the image is never uploaded.
 - AI writes per album, never per person. The personal note is assembled on the device.
   Cloud "richer notes" are opt-in only.
@@ -57,13 +60,18 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Origin filters (country, city, neighbourhood) can use MusicBrainz/Wikidata area data.
 
 ## Album pool rules (draft, see Notion task)
-- Studio albums only: MusicBrainz release group primary type Album, no secondary types
-  (Compilation, Live, Remix, Soundtrack, DJ-mix, Demo, Interview). Use the original release group, not remasters.
-- At least 25 minutes long.
-- Artist alive and active: no end date in MusicBrainz, and a release in the last 10 years.
+- Studio albums only (stand-in, MusicBrainz has no "studio" flag): release group primary type Album with no secondary
+  type at all. Full secondary list (verified 2026-10-14, musicbrainz.org/doc/Release_Group/Type): Compilation, Soundtrack,
+  Spokenword, Interview, Audiobook, Audio drama, Live, Remix, DJ-mix, Mixtape/Street, Demo, Field recording.
+  Note: excluding Mixtape/Street drops many rap releases; review this choice with Tiff.
+- Remasters are releases inside the same release group: pick the release group, use its earliest release for track data.
+- At least 25 minutes long: summed from the track lengths of that release (release groups have no length; skip if lengths are missing).
+- Artist alive and active: artist not marked "ended" and no end date in MusicBrainz, plus a release in the last 10 years.
+  A missing end date is not proof of life: cross-check Wikidata date of death before an artist enters the pool.
 - Sound data for at least 60% of the album's tracks.
 - No known AI-generated releases; plus Tiff's blocklist of artists and labels.
-- Listenable floor: enough community signal (Discogs have+want or ListenBrainz listeners) so far picks stay listenable. Threshold to tune.
+- Listenable floor: enough community signal (ListenBrainz listener counts via its popularity API; Discogs have/want is not in
+  the CC0 dumps, only in the rate-limited API) so far picks stay listenable. Threshold to tune: ListenBrainz is sparse for niche artists.
 - Balance: no single region or main genre over 15% of the pool.
 
 ## Data sources and licences
