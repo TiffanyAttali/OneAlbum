@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.7, 2026-10-14 (v0.5 added optional accounts and on-device picking; v0.6-0.7 fact-checked pool rules, privacy wording and data sources). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.8, 2026-10-14 (v0.8 allows licensed audio analysis; v0.5 added optional accounts and on-device picking; v0.6-0.7 fact-checked pool rules, privacy wording and data sources). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -46,6 +46,8 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Streaming links (Odesli) and album notes are prepared once per album on our side and shipped with the map,
   so no outside service learns which album a user is about to play.
 - Each album has a sound fingerprint: rhythm, energy, timbre, harmony, voice, era, credits.
+- Goal (Tiff, 2026-10-14): our own sound ruler measured from the audio with formulas (beat, harmony, tempo, texture, colour),
+  not genre. Audio analysis is allowed when we are licensed to use that audio. Open question: how to get licensed audio at scale.
 - The user's sonic profile is built once at import (6-10 sound clusters) and rebuilt only on re-import.
 - Distance from the profile decides close / edge / far. Genre labels only add a penalty.
 - The user's sound clusters are shown as named **bins** (like record-shop bins). Bins are part of the mood filter.
@@ -86,15 +88,18 @@ All verified live on 2026-10-14 (sources in brackets).
 - Soundcharts API for post-2022 releases: 1,000 free requests to test. Paid plans: Starter $50 (10k requests), Developer $250
   (500k), Startup $500 (4M); premium endpoints only from Startup, and which plan includes audio features is unconfirmed.
   Cost: $250-500 once (one month of Developer to fill a 50k-100k pool), then $50/month (Starter) to keep it fresh,
-  if Starter includes audio features (unverified). Its features come from streaming platforms, so test 2025-26 coverage first.
+  if Starter includes audio features (unverified). Tested 2026-10-14: its audio features are Spotify's own values (same to 2 decimals),
+  so using them depends on Soundcharts holding the rights to resell Spotify data.
   Commercial use needs written permission (terms 5.1, 5.3). [developers.soundcharts.com/pricing, soundcharts.com/terms]
 - Odesli for cross-platform album links (10 requests/min without a key; key by email). Commercial terms confirmed in writing first.
-- Cyanite is not an option as designed: it analyses uploaded audio files, which our "never analyse audio" rule forbids. [cyanite.ai/faq]
+- Cyanite analyses audio files we upload, so it needs audio we are licensed to send. Back on the table (2026-10-14). [cyanite.ai/faq]
+- Preview clips: Apple's 30-second previews are for promoting store content and streaming only, no download or caching
+  (performance-partners.apple.com/search-api, checked 2026-10-14), so they can't be analysed.
 
 ## Never do
 - Never call the Spotify Web API (5-user cap; no extended access).
 - Never use the Deezer API (non-commercial terms) or Essentia models (non-commercial without a paid licence).
-- Never download, store or analyse audio.
+- Never download, store or analyse audio we aren't licensed to use for that.
 - Never send personal data to any server or AI.
 - Never show real album artwork we don't have rights to: covers are generated from the album's sound.
 
