@@ -85,7 +85,8 @@ All verified live on 2026-10-14 (sources in brackets).
 - Discogs monthly dumps: CC0 (release, artist, label, master data; no have/want counts). [data.discogs.com]
 - Soundcharts API for post-2022 releases: 1,000 free requests to test. Paid plans: Starter $50 (10k requests), Developer $250
   (500k), Startup $500 (4M); premium endpoints only from Startup, and which plan includes audio features is unconfirmed.
-  A 50k-album backfill needs $250-500/month. Its features come from streaming platforms, so test 2025-26 coverage first.
+  Cost: $250-500 once (one month of Developer to fill a 50k-100k pool), then $50/month (Starter) to keep it fresh,
+  if Starter includes audio features (unverified). Its features come from streaming platforms, so test 2025-26 coverage first.
   Commercial use needs written permission (terms 5.1, 5.3). [developers.soundcharts.com/pricing, soundcharts.com/terms]
 - Odesli for cross-platform album links (10 requests/min without a key; key by email). Commercial terms confirmed in writing first.
 - Cyanite is not an option as designed: it analyses uploaded audio files, which our "never analyse audio" rule forbids. [cyanite.ai/faq]
