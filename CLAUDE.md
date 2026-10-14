@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.6, 2026-10-14 (v0.5 added optional accounts and on-device picking; v0.6 fact-checks pool rules and privacy wording). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.7, 2026-10-14 (v0.5 added optional accounts and on-device picking; v0.6-0.7 fact-checked pool rules, privacy wording and data sources). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -21,7 +21,7 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
   "Coups de cœur" shelf. It counts as the strongest quality cue but, like every rating, never steers picks toward
   similar albums (loved albums create loops).
 - Every pick: artist alive and active, checked against data. Never trust a model to remember this.
-- Genre is only ever a penalty (no-repeat on main genre over the last 2 picks), never a target.
+- Genre is only ever a penalty (no-repeat on main genre over the last 2 picks), never a target. Genres come from Discogs (CC0), not MusicBrainz tags.
 - No examples in prompts or seeds: they become anchors. Each pick starts from a random thread in the user's library.
 
 ## Privacy rules (never break these)
@@ -75,11 +75,20 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Balance: no single region or main genre over 15% of the pool.
 
 ## Data sources and licences
-- MusicBrainz core data: CC0. MetaBrainz Stealth Start-Up tier while not public.
-- AcousticBrainz: CC0, about 7M recordings up to 2022. Dumps only.
-- Discogs monthly dumps: CC0.
-- Soundcharts API for post-2022 releases (paid, from about $50 a month). Commercial use confirmed in writing first.
-- Odesli for cross-platform album links. Commercial terms confirmed in writing first.
+All verified live on 2026-10-14 (sources in brackets).
+- MusicBrainz core data (artists, release groups, recordings, genre names): CC0. **Tags, genre associations and ratings are
+  CC BY-NC-SA (non-commercial)**: don't use them in the product. Take genres for the genre penalty from Discogs (CC0) instead.
+  [musicbrainz.org/doc/MusicBrainz_Database]
+- MetaBrainz: Stealth Start-Up tier is free while not public; once public, Bronze from $100/month. Live API: 1 request/second.
+  [metabrainz.org/supporters/account-type, musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting]
+- AcousticBrainz: CC0, about 7.5M recordings, collection stopped in 2022. Dumps only. [acousticbrainz.org/download]
+- Discogs monthly dumps: CC0 (release, artist, label, master data; no have/want counts). [data.discogs.com]
+- Soundcharts API for post-2022 releases: 1,000 free requests to test. Paid plans: Starter $50 (10k requests), Developer $250
+  (500k), Startup $500 (4M); premium endpoints only from Startup, and which plan includes audio features is unconfirmed.
+  A 50k-album backfill needs $250-500/month. Its features come from streaming platforms, so test 2025-26 coverage first.
+  Commercial use needs written permission (terms 5.1, 5.3). [developers.soundcharts.com/pricing, soundcharts.com/terms]
+- Odesli for cross-platform album links (10 requests/min without a key; key by email). Commercial terms confirmed in writing first.
+- Cyanite is not an option as designed: it analyses uploaded audio files, which our "never analyse audio" rule forbids. [cyanite.ai/faq]
 
 ## Never do
 - Never call the Spotify Web API (5-user cap; no extended access).
