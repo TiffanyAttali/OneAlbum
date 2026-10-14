@@ -29,7 +29,8 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Accounts are optional (decided by Tiff 2026-10-14). If a user signs in to back up or sync, their personal data is encrypted
   on the device before it leaves (end-to-end). The server only stores data it cannot read.
 - The server holds the public album map. It never receives anything readable about a user's taste.
-- No analytics, no tracking, no server logs that tie a request to a user's IP address.
+- No analytics, no tracking. We never store or use IP addresses. The host's short-lived technical logs (Vercel) do include
+  IPs and can't be switched off, so hide IPs wherever a setting allows (e.g. log drains) and never forward or keep them.
 - Screenshots are read on the device (Tesseract.js); the image is never uploaded.
 - AI writes per album, never per person. The personal note is assembled on the device.
   Cloud "richer notes" are opt-in only.
