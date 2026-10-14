@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.4, 2026-10-13 (adds sound bins, "Who do you support" and "Coup de cœur"). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.5, 2026-10-14 (adds optional accounts with encrypted personal data, and picking on the device). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -25,16 +25,23 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - No examples in prompts or seeds: they become anchors. Each pick starts from a random thread in the user's library.
 
 ## Privacy rules (never break these)
-- Everything personal stays on the device: library, sound profile, ratings, history, tags. No account.
-- The server only holds the public album map. It never receives anything about a user.
+- Everything personal lives on the device first: library, sound profile, ratings, history, tags. Private, secured, local whenever possible.
+- Accounts are optional (decided by Tiff 2026-10-14). If a user signs in to back up or sync, their personal data is encrypted
+  on the device before it leaves (end-to-end). The server only stores data it cannot read.
+- The server holds the public album map. It never receives anything readable about a user's taste.
+- No analytics, no tracking, no server logs that tie a request to a user's IP address.
 - Screenshots are read on the device (Tesseract.js); the image is never uploaded.
 - AI writes per album, never per person. The personal note is assembled on the device.
   Cloud "richer notes" are opt-in only.
-- Plus is unlocked by a Lemon Squeezy licence key, not an account.
+- Plus is unlocked by a Lemon Squeezy licence key; paying never requires an account. Lemon Squeezy (and the opt-in newsletter)
+  hold an email address, never linked to what the user listens to.
 - One-tap export and one-tap erase of all local data.
 
 ## Engine
 - Album map: curated pool (see "Album pool rules"), 50k albums at launch.
+- The whole album map is downloaded to the device and picking (vector search) runs there. The user's profile is never sent to a server to search.
+- Streaming links (Odesli) and album notes are prepared once per album on our side and shipped with the map,
+  so no outside service learns which album a user is about to play.
 - Each album has a sound fingerprint: rhythm, energy, timbre, harmony, voice, era, credits.
 - The user's sonic profile is built once at import (6-10 sound clusters) and rebuilt only on re-import.
 - Distance from the profile decides close / edge / far. Genre labels only add a penalty.
@@ -74,7 +81,8 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Never show real album artwork we don't have rights to: covers are generated from the album's sound.
 
 ## Stack (proposed)
-Next.js on Vercel · Supabase (EU region) for the album map and vector search · Claude API for per-album notes ·
+Next.js on Vercel · Supabase (EU region) to build and serve the album map, and for optional sign-in + encrypted backup ·
+picking runs on the device · Claude API for per-album notes ·
 Tesseract.js on the device · Lemon Squeezy for payments.
 
 ## How to work in this repo
