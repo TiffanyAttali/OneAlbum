@@ -1,6 +1,6 @@
 # CLAUDE.md — album picker (name to come)
 
-Draft v0.8, 2026-10-14 (v0.8 allows licensed audio analysis; v0.5 added optional accounts and on-device picking; v0.6-0.7 fact-checked pool rules, privacy wording and data sources). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
+Draft v0.9, 2026-10-18 (v0.9 lets users' album notes guide picks through opt-in AI; v0.8 allows licensed audio analysis; v0.5 added optional accounts and on-device picking; v0.6-0.7 fact-checked pool rules, privacy wording and data sources). Written from the Notion dashboard for Tiff's review. Once reviewed, commit at the repo root.
 
 ## What we're building
 A standalone web app that hands you one full album at a time, by a living artist, picked at the edges of your own sound.
@@ -34,8 +34,11 @@ The working prototype (claude.ai artifact, v13) is the reference for features. E
 - Album links (Odesli) are pre-computed into the public map, so no third party sees what a user was picked.
 - Say it honestly: the Plus licence check sends the licence key to Lemon Squeezy, which knows the buyer's name and email.
 - Screenshots are read on the device (Tesseract.js); the image is never uploaded.
-- AI writes per album, never per person. The personal note is assembled on the device.
+- By default AI writes per album, never per person. The personal note is assembled on the device.
   Cloud "richer notes" are opt-in only.
+- Album notes (Tiff, 2026-10-18): users can write a free-text note on each album. By default it stays on the device as a
+  private diary. If the user opts in, an AI can read their notes to turn them into hints for their picks. That call carries
+  no account or user id, the AI provider keeps nothing (no training, no retention), and only the hints come back to the device.
 - Plus is unlocked by a Lemon Squeezy licence key; paying never requires an account. Lemon Squeezy (and the opt-in newsletter)
   hold an email address, never linked to what the user listens to.
 - One-tap export and one-tap erase of all local data.
@@ -100,7 +103,7 @@ All verified live on 2026-10-14 (sources in brackets).
 - Never call the Spotify Web API (5-user cap; no extended access).
 - Never use the Deezer API (non-commercial terms) or Essentia models (non-commercial without a paid licence).
 - Never download, store or analyse audio we aren't licensed to use for that.
-- Never send personal data to any server or AI.
+- Never send personal data to any server or AI, except a user's own opt-in (album notes to AI, encrypted backup).
 - Never show real album artwork we don't have rights to: covers are generated from the album's sound.
 
 ## Stack (proposed)
